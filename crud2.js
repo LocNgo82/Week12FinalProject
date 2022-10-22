@@ -1,4 +1,4 @@
-// customer class to create the customer's name and his or her orders.
+// customer class creates the customer's name and his or her orders using an array.
 class Customer {
     constructor(name) {
         this.name = name;
@@ -7,7 +7,7 @@ class Customer {
     
 }
 
-// item class to store the name of the item, the cost, and the quantity.
+// item class stores the name of the item, the cost, and the quantity.
 class Item {
     constructor(name, cost, quantity) {
         this.name = name;
@@ -16,7 +16,7 @@ class Item {
     }
 }
 
-// customer service class allow the user to post, get, update, delete from the server using Jquery and Ajax.
+// customer service class allows the user to post, get, update, delete from the server using Jquery and Ajax.
 class CustomerService {                                    
     // I use mock API to store the customer data.
     static url = "https://63540cf4ccce2f8c020237cf.mockapi.io/Promineo_Tech_API/invoices";
@@ -54,18 +54,18 @@ class CustomerService {
     }
 }
 
-// DOM manager class allow users to interact with the webpage and then send or retrieve data from the server,
+// DOM manager class allows users to interact with the webpage and then send or retrieve data from the server,
 // and display the data on the browser.
 class DOMManager {
     static Customers;
 
-    // getAllCustomers call the CustomerService class to retrieve all the customers from the server
-    // and then display the customer on the webpage.
+    // getAllCustomers calls the CustomerService class to retrieve all the customers from the server
+    // and then displays the customer data on the webpage.
     static getAllCustomers() {
         CustomerService.getAllCustomers().then(Customers => this.render(Customers));
     }
 
-    // createCustomer call the CustomerService class to create a new customer and save it to the server,
+    // createCustomer calls the CustomerService class to create a new customer and save it to the server,
     // and then display all the customers on the webpage.
     static createCustomer(name) {
         
@@ -76,7 +76,7 @@ class DOMManager {
         .then((Customers) => this.render(Customers));
     }
 
-    // deleteCustomer call the CustomerService class to delete a customer from server,
+    // deleteCustomer calls the CustomerService class to delete a customer from server,
     // and then display all the remaining customers on the webpage.
     static deleteCustomer(id) {
         CustomerService.deleteCustomer(id) 
@@ -86,7 +86,7 @@ class DOMManager {
         .then((Customers) => this.render(Customers));
     }
 
-    // addItem function add an item to an existing customer, update the customer on the server,
+    // addItem function adds an item to an existing customer, update the customer on the server,
     // and then display all the customers on the webpage.
     static addItem(id) {
         for (let customer of this.Customers) {
@@ -104,8 +104,8 @@ class DOMManager {
         }
     }
 
-    // deleteitem function delete an item of an existing customer, update the customer on the server,
-    // and then display all the customers on the webpage.
+    // deleteitem function deletes an item of an existing customer, updates the customer on the server,
+    // and then displays all the customers on the webpage.
     static deleteitem(CustomerId, itemNumber) {
         for (let customer of this.Customers) {
             if (customer.id == CustomerId) {
@@ -120,7 +120,7 @@ class DOMManager {
         }
     }
 
-    // render function use jquery to dynamically display customer data on the webpage.  It uses bootstrap to 
+    // render function uses jquery to dynamically display customer data on the webpage.  It uses bootstrap to 
     // format the customer data on the webpage.
     static render(Customers) {
         this.Customers = Customers;
@@ -188,13 +188,13 @@ class DOMManager {
                 </p>`);
             
                 // as the program go through the list of orders, also calculate the subtotal for each item,
-                // and the calculate the total for the entire order at the end.
+                // and then calculate the total for the entire order at the end.
             let count = 1;  // I also use count as the item id 
             let total = 0;
             for (let item of Customer.items) {
                 // calculate the subotal 
                 let subtotal = item.cost * item.quantity;
-                // calculate the total 
+                // calculate the running total 
                 total += subtotal;
                 // use jquery to create the line item on the webpage.
                 $(`#${Customer.id}`).find('.card-body').append(
